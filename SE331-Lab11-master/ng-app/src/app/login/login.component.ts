@@ -12,22 +12,23 @@ export class LoginComponent implements OnInit {
   model: any = {};
   loading = false;
   error='';
-  constructor(private router: Router,
-    private authenticationService: AuthenticationService,private  route: ActivatedRoute) { }
+  constructor(private router: Router,private route:ActivatedRoute,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     //reset login status
     this.authenticationService.logout();
-    let source:String;
-    this.route.queryParams.subscribe(param =>{
-      if(param['source'])
-        source = param['source'];
-      else
-        source = null;
+    let source:string;
+    this.route.queryParams.subscribe(
+      params=>{
+        if(params['source'])
+          source=params['source'];
+        else
+          source=null;
       }
     )
     if(source){
-      this.error = 'Please login before use '+ source +' page';
+      this.error='Please login before use '+ source + ' page';
     }
   }
 

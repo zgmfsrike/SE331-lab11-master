@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/course").permitAll()
+
                 .antMatchers(HttpMethod.POST,"/course").hasRole("ADMIN")
                 .antMatchers("/auth/**","/h2-console/**","/refresh","/student/images/**").permitAll()
 
