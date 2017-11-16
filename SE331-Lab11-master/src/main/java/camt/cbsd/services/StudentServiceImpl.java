@@ -70,4 +70,13 @@ public class StudentServiceImpl implements StudentService {
         studentDao.addStudent(student);
         return student;
     }
+
+    @Override
+    public Student getStudentForTranfer(String username) {
+        Student student = studentDao.findByUsername(username);
+        Hibernate.initialize(student.getAuthorities());
+        return student;
+    }
+
+
 }
