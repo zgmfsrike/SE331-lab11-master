@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Router,ActivatedRoute} from "@angular/router";
 import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
@@ -13,11 +13,22 @@ export class LoginComponent implements OnInit {
   loading = false;
   error='';
   constructor(private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,private  route: ActivatedRoute) { }
 
   ngOnInit() {
     //reset login status
     this.authenticationService.logout();
+    let source:String;
+    this.route.queryParams.subscribe(param =>{
+      if(param['source'])
+        source = param['source'];
+      else
+        source = null;
+      }
+    )
+    if(source){
+      this.error = 'Please login before use '+ source +' page';
+    }
   }
 
   login(){

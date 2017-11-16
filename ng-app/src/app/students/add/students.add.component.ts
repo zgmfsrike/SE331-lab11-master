@@ -16,6 +16,19 @@ export class StudentsAddComponent {
 
   ngOnInit() {
     this.student = new Student();
+
+    this.studentDataService.getStudentsData()
+      .subscribe(result => {
+          // Handle result
+        },
+        (error) =>{
+          if(error.status === 401){
+            this.router.navigate(['login'],{queryParams:{source:'student'}});
+          }
+        }
+      );
+
+
   }
 
   upQuantity(student: Student) {
@@ -39,8 +52,10 @@ export class StudentsAddComponent {
         }else{
           alert("Error in adding the student");
         }
-      });
+      },);
   }
+
+
 
   onFileChange(event, student: any) {
     var filename = event.target.files[0].name;

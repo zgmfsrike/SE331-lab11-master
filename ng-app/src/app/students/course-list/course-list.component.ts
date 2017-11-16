@@ -16,6 +16,7 @@ export class CourseListComponent {
   @Input('enrolledCourse') courses:Course;
   ngOnInit() {
 
+
   }
 
 }
